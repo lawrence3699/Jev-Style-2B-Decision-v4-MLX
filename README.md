@@ -148,6 +148,24 @@ m.close()
 - The input format, block attention and the readout are described on the
   [main card](https://huggingface.co/chaoliangUNSW/Jev-Style-2B-Decision-v4#input-format-and-readout).
 
+### With the jev-style package
+
+[jev-style](https://github.com/lawrence3699/jev-style) 0.6.0 or later downloads this repository at a pinned revision
+and runs this runtime behind a local systemone-compatible API, with a Playground, demos and MCP tools:
+
+```bash
+pip install "jev-style[mlx]"          # with mlx-lm 0.31.3
+jev-style serve --release 2b-v4       # bf16 on Apple silicon; --precision 8bit for the 2.00 GB folder
+```
+
+```python
+from jev_style import JevStyle, noul
+
+js = JevStyle.from_pretrained("chaoliangUNSW/Jev-Style-2B-Decision-v4-MLX", precision="8bit")
+out = js.decide({"app": "Mail", "draft": {"to": "ana@example.com", "attachments": []}},
+                {"attached": noul("Is the report attached?")})
+```
+
 ## Scope and limits
 
 - **Runtime required.** `mlx_lm.generate` can load the weights in `bf16/` or `8bit/` (the repository root holds no
