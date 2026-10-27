@@ -1,0 +1,43 @@
+chaoliangUNSW/Jev-Style-2B-Decision-v4-MLX
+Copyright 2026 chaoliangUNSW. Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This model is a fine-tuned derivative of Qwen3.5-2B (https://huggingface.co/Qwen/Qwen3.5-2B,
+revision 15852e8c16360a2fea060d615a32b45270f8a8fc), Copyright 2026 Alibaba Cloud, licensed under the Apache
+License, Version 2.0. The LICENSE file in this repository is the license file distributed with Qwen3.5-2B.
+
+MLX builds of chaoliangUNSW/Jev-Style-2B-Decision-v4 (text only). Modifications relative to Qwen3.5-2B:
+- all language-model weights were fine-tuned (full fine-tuning, bf16 training, two runs with different seeds whose
+  final weights were averaged uniformly) to score typed decision questions (choice / score / true-false) with a
+  verdict readout: logit(" yes") - logit(" no") at one " ->" slot per option, using the v2 input protocol (render v2
+  with long-option catalogues; block-causal attention in the full-attention layers over 2,048-token blocks);
+  calibration temperatures per question type were fitted afterwards (readout_config.json);
+- these files hold the language model only: the vision tower (frozen during training) and the multi-token-prediction
+  head are not included; the language-model tensors of chaoliangUNSW/Jev-Style-2B-Decision-v4 (revision
+  3f2c063f7d94cfa281b9fee87a5b89bed6745506) were saved unchanged as a text-only Qwen3_5ForCausalLM with tied
+  input/output embeddings (tensor names model.language_model.* -> model.*) and then converted;
+- converted to MLX format with mlx-lm 0.31.3 / mlx 0.32.2 (https://github.com/ml-explore/mlx-lm, MIT License,
+  Copyright Apple Inc.): bf16/ = bfloat16, 8bit/ = affine 8-bit quantisation, group size 64; each folder also holds
+  macjev_norms_fp32.safetensors (the exact FP32 (1 + w) RMSNorm weights);
+- the runtime script contains a modified copy of mlx-lm 0.31.3's qwen3_5 GatedDeltaNet.__call__ (MIT License,
+  Copyright Apple Inc.; the q/k normalisation epsilon changed and the sharding branches removed); the MIT copyright
+  and permission notice is reproduced in THIRD_PARTY_NOTICES.md;
+- added the runtime script (jev_style_decision_mlx.py), readout/release configuration files, validation records,
+  the integrity manifest and this NOTICE.
+
+Training labels: soft labels for part of the training rows were distilled from TypeSafe Jev 1.14 via its public
+API (/v1/systemone). No Jev weights or code are included. The other labels come from the public datasets and
+generators listed in the main model card
+(chaoliangUNSW/Jev-Style-2B-Decision-v4).
+
+The question types (choice / score / noul) follow the typed-decision convention of Laya
+(https://github.com/NandhaKishorM/laya, Apache-2.0) so both models can be evaluated on the same inputs. No Laya
+code or weights are included.
+
+Part of the Jev-Style decision series: v1 = chaoliangUNSW/Jev-Style-Qwen3.5-2B-Decision, v2 =
+chaoliangUNSW/Jev-Style-Qwen3.5-2B-Decision-v2, v3 = chaoliangUNSW/Jev-Style-2B-Decision-v3 and
+chaoliangUNSW/Jev-Style-0.8B-Decision-v3. This model was fine-tuned from Qwen/Qwen3.5-2B; no weights of the earlier
+models were used (the v3 training rows were reused as part of the training data).
+
+Not affiliated with, endorsed by or connected to TypeSafe or Jev. "Jev-Style" describes the kind of model (a small
+typed-decision model in a similar style). Not affiliated with or endorsed by Alibaba Cloud / the Qwen team or the
+Laya authors.

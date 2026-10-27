@@ -1,0 +1,142 @@
+{
+ "format": "jev-style-manifest-v1",
+ "repo": "chaoliangUNSW/Jev-Style-2B-Decision-v4-MLX",
+ "created_unix": 1793114291.7582028,
+ "files": {
+  "8bit/chat_template.jinja": {
+   "sha256": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+   "bytes": 7755
+  },
+  "8bit/config.json": {
+   "sha256": "8865dd86a4e561e6b036667cd0d5c1c39ad12527b3feda7c585cf116d890477a",
+   "bytes": 2205
+  },
+  "8bit/generation_config.json": {
+   "sha256": "62153eb6c69f2e1f426beaa8002b7186437e949c7588167085df14e10e9c0a73",
+   "bytes": 116
+  },
+  "8bit/macjev_norms_fp32.safetensors": {
+   "sha256": "2e81a5b9136656bd66698eaf54f2f735cce4f8fb41074dc7a1f36799e010b9ba",
+   "bytes": 419991
+  },
+  "8bit/model.safetensors": {
+   "sha256": "651919720864806edb95329553dc351661c5ca488c77f7894ef85cecca9c31c1",
+   "bytes": 2000043057
+  },
+  "8bit/model.safetensors.index.json": {
+   "sha256": "54d94d008c07e39846c0b454f68055622bb635a0623b51bce86d724e18733aab",
+   "bytes": 60786
+  },
+  "8bit/tokenizer.json": {
+   "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+   "bytes": 19989325
+  },
+  "8bit/tokenizer_config.json": {
+   "sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87",
+   "bytes": 1123
+  },
+  "LICENSE": {
+   "sha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+   "bytes": 11544
+  },
+  "NOTICE": {
+   "sha256": "c8c014c20e6450a1b56d8d862d3724a0801db706215aa5101a8d3a40fe5069c2",
+   "bytes": 3433
+  },
+  "README.md": {
+   "sha256": "b75f51f1feba36955dbae7199c0db7425780c64a4e9aab47cf4401c5342dc62b",
+   "bytes": 12223
+  },
+  "THIRD_PARTY_NOTICES.md": {
+   "sha256": "55ade7a70bb6bfcb8f0a8e9f4aef9222cde16c8bb44b6135aab6f929c706cbc5",
+   "bytes": 2146
+  },
+  "bf16/chat_template.jinja": {
+   "sha256": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+   "bytes": 7755
+  },
+  "bf16/config.json": {
+   "sha256": "1dd31077b37706dc40e1bbddedf5eeba3e50e1d3c85d1fe34bfd5957a8d6ad14",
+   "bytes": 2000
+  },
+  "bf16/generation_config.json": {
+   "sha256": "62153eb6c69f2e1f426beaa8002b7186437e949c7588167085df14e10e9c0a73",
+   "bytes": 116
+  },
+  "bf16/macjev_norms_fp32.safetensors": {
+   "sha256": "2e81a5b9136656bd66698eaf54f2f735cce4f8fb41074dc7a1f36799e010b9ba",
+   "bytes": 419991
+  },
+  "bf16/model.safetensors": {
+   "sha256": "98ac43638a2828c343ce7435b69ac69e242cc951a4b1f2cec308aa5399d8fbc4",
+   "bytes": 3763691755
+  },
+  "bf16/model.safetensors.index.json": {
+   "sha256": "d49d69fd9257879080337533c6051a14ff4f561a79b9f70d8bdb74e47444a306",
+   "bytes": 28024
+  },
+  "bf16/tokenizer.json": {
+   "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+   "bytes": 19989325
+  },
+  "bf16/tokenizer_config.json": {
+   "sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87",
+   "bytes": 1123
+  },
+  "config.json": {
+   "sha256": "1dd31077b37706dc40e1bbddedf5eeba3e50e1d3c85d1fe34bfd5957a8d6ad14",
+   "bytes": 2000
+  },
+  "jev_style_decision_mlx.py": {
+   "sha256": "e8e0d6e08a7614764743db85a18a4ec5606a1cfb7fd26fc063fb9ee27eac644b",
+   "bytes": 55313
+  },
+  "readout_config.json": {
+   "sha256": "5772ba8076f124f0c1b5b153aabe4a5dcb16f089b227e3d3b3e3873ae0fa4f72",
+   "bytes": 2491
+  },
+  "release_config.json": {
+   "sha256": "c1ccf68c756cdb674e446ecd12ac4ce630590c30f54fd8aecaf7aaa4e9a9b72b",
+   "bytes": 15794
+  },
+  "requirements.txt": {
+   "sha256": "23f1e2ed128c26fb17ffc8c4f1f2406c08845b58dc53949f8c30396c325e831b",
+   "bytes": 485
+  },
+  "validation/fixtures.json": {
+   "sha256": "1acd37e138e4882c6099e3b88d57f46b47dd508fa737d1f6ca9e0f3199eab6f5",
+   "bytes": 1377
+  },
+  "validation/parity/PREDECLARED_RELEASE_GATES_2B_v4.md": {
+   "sha256": "cb84de76f5a123a0ae63c130c89f2ce7b8ab6ff5ca17633b0ea9479ddfeff299",
+   "bytes": 4892
+  },
+  "validation/parity/compare_mlx_affine8-g64_base_vs_block.json": {
+   "sha256": "83cd8d6c4a30e04a9f65bb0b051cba0c3127e51dbefbdf32ef2a50563afcf735",
+   "bytes": 3291
+  },
+  "validation/parity/compare_mlx_affine8-g64_gate_vs_block.json": {
+   "sha256": "b467d435df7de3f963221f6c42208706feef0126c2ac26a6b4be347ef24c1c21",
+   "bytes": 2492
+  },
+  "validation/parity/compare_mlx_bf16_base_vs_block.json": {
+   "sha256": "7fde002531eac40ab84702f4849ac4929ea0a87844cb0d7749e91938b9545103",
+   "bytes": 3289
+  },
+  "validation/parity/compare_mlx_bf16_gate_vs_block.json": {
+   "sha256": "c3bef97bd2cf4c05d406a2c0e22855e229614cbc2d9689cb68d011f4d81b810d",
+   "bytes": 2505
+  },
+  "validation/parity/cross_format_dp.json": {
+   "sha256": "32bbfbc41b4284153ab81ffd562fde547c3113739256956fd5bff6e3308d4794",
+   "bytes": 1400
+  },
+  "validation/runtime/render_check.json": {
+   "sha256": "78fb238415ada197db67644e3332a7560c7b27586ed1406c577331e0f51ce117",
+   "bytes": 1036
+  }
+ },
+ "readme_hashed": true,
+ "readme_placeholder": false,
+ "note": "manifest.json hashes every file of the repo except itself, README.md included. The runtime --verify check skips the documentation and evaluation records (README.md, figures/, assets/, validation/, eval_results.json) and checks every other listed file it needs."
+}

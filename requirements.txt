@@ -1,0 +1,8 @@
+# tested with: python 3.12.13, mlx 0.32.2, mlx-lm 0.31.3, transformers 5.17.0, tokenizers 0.23.2, numpy 2.5.3 (Apple M1 Max, macOS 15.7.5)
+# mlx-lm is pinned: the runtime corrects two Qwen3.5 numerics inside mlx-lm (Gated-DeltaNet q/k l2norm eps,
+# FP32 (1 + w) RMSNorm weights) and checks the sha256 of the mlx-lm source it patches; other versions are refused.
+mlx==0.32.2
+mlx-lm==0.31.3
+transformers==5.17.0  # imported by mlx-lm when the model loads
+tokenizers==0.23.2
+numpy==2.5.3

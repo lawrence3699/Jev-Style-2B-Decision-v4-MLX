@@ -1,0 +1,449 @@
+{
+ "format": "jev-style-release-v1",
+ "model_name": "Jev-Style-2B-Decision-v4",
+ "repo": "chaoliangUNSW/Jev-Style-2B-Decision-v4-MLX",
+ "generation": "v4 (fourth generation of the Jev-Style decision series)",
+ "lineage": {
+  "v1": "chaoliangUNSW/Jev-Style-Qwen3.5-2B-Decision",
+  "v1_public_gguf": "chaoliangUNSW/Jev-Style-Qwen3.5-2B-Decision-GGUF",
+  "v2": "chaoliangUNSW/Jev-Style-Qwen3.5-2B-Decision-v2",
+  "v3_0.8b": "chaoliangUNSW/Jev-Style-0.8B-Decision-v3",
+  "v3_2b": "chaoliangUNSW/Jev-Style-2B-Decision-v3",
+  "v4_2b": "chaoliangUNSW/Jev-Style-2B-Decision-v4"
+ },
+ "base_model": "Qwen/Qwen3.5-2B",
+ "base_model_revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+ "base_model_relation": "finetune",
+ "converted_from": {
+  "repo": "chaoliangUNSW/Jev-Style-2B-Decision-v4",
+  "revision": "3f2c063f7d94cfa281b9fee87a5b89bed6745506",
+  "what": "the language model of the released checkpoint (the vision tower is not part of these files)"
+ },
+ "architecture": "Qwen3_5ForCausalLM, text only: the language model of the released Qwen3_5ForConditionalGeneration (24 layers: 18 Gated DeltaNet + 6 full attention, hidden 2048, tied embeddings, 1,881,825,088 parameters)",
+ "inputs": "text and JSON states only; images need the main repository's PyTorch runtime",
+ "readout": "verdict",
+ "template": "macjev-render-v2-long-options",
+ "layout": "sb",
+ "attention": "block-causal in the 6 full-attention layers: the input is cut into [start, stop) blocks of at most block_size tokens (state blocks; one short question block, or catalogue blocks + rubric blocks when question + options + slots exceed block_size); every block attends to all earlier tokens and to itself with no causal mask inside the block. Gated-DeltaNet layers are ordinary recurrent layers.",
+ "readout_config": "readout_config.json",
+ "budgets": {
+  "max_len": 32768,
+  "question_option_limit": null,
+  "block_size": 2048,
+  "max_options": 255
+ },
+ "calibration": {
+  "version": "macjev-temperature-v3-qtype",
+  "by_qtype": {
+   "choice": 0.7698498587261627,
+   "noul": 0.824717362670051,
+   "score": 0.583566330184863
+  },
+  "global_T": 0.7734836880351792,
+  "n_rows": 3325,
+  "cal_ids_sha256": "757ebf267d11288f2b602295a8f13f47d2eb32d598c646df9a1cf210f3f5a717",
+  "two_fold_heldout_nll": {
+   "global": 0.2469615557272353,
+   "per_qtype": 0.2459016209570835
+  },
+  "fit_quality": {
+   "nll_before": 0.2618054844276844,
+   "nll_after": 0.24572888908038026,
+   "ece_before": 0.0494947223980491,
+   "ece_after": 0.02079632343761453,
+   "accuracy": 0.9154887218045112,
+   "n": 3325
+  },
+  "fitted_on": "3,325 held-out calibration rows (not training, not dev rows)"
+ },
+ "source": {
+  "text_only_export": {
+   "script": "scripts/formats/make_text_only.py (renames model.language_model.* -> model.*, drops model.visual.*; same tensors, bf16)",
+   "files": {
+    "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+    "config.json": "88bf86c270d616198909ed1eefef8d8c21ac1fa13f62e947f20f8e1ebd02c211",
+    "generation_config.json": "62153eb6c69f2e1f426beaa8002b7186437e949c7588167085df14e10e9c0a73",
+    "model.safetensors": "484e745af620e609b723d74a997126b360f0bdd622aefc0509a72838d38274df",
+    "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "tokenizer_config.json": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87"
+   },
+   "source_shards_sha256": {
+    "model-00001-of-00003.safetensors": "05b29c40bc19ad741b0d7f9aafc220595dad7c87fc735e9bd3ae8d14cb83d909",
+    "model-00002-of-00003.safetensors": "fc286df6de47b67637a968f31f5f78948a125c06708f85ed4ac1491b99e9d494",
+    "model-00003-of-00003.safetensors": "0ba7bf9c4224f44a2745f58f75634f3cebdf2432cbd0546f5ef97becd8ab5496"
+   },
+   "reproduced": "byte-identical on the Mac and on the Colab VM (model.safetensors sha256 above)"
+  }
+ },
+ "related_repos": {
+  "main": "chaoliangUNSW/Jev-Style-2B-Decision-v4",
+  "gguf": "chaoliangUNSW/Jev-Style-2B-Decision-v4-GGUF",
+  "mlx": "chaoliangUNSW/Jev-Style-2B-Decision-v4-MLX"
+ },
+ "results": "benchmark results are on the main model card; they were measured with the main repository's PyTorch runtime, which these files reproduce within format_gates below",
+ "tested_with": {
+  "python": "3.12.13",
+  "mlx": "0.32.2",
+  "mlx-lm": "0.31.3",
+  "transformers": "5.17.0",
+  "tokenizers": "0.23.2",
+  "numpy": "2.5.3",
+  "machine": {
+   "platform": "macOS-15.7.5-arm64-arm-64bit",
+   "chip": "Apple M1 Max",
+   "memory_bytes": 68719476736,
+   "mlx": "0.32.2",
+   "mlx_lm": "0.31.3"
+  }
+ },
+ "weights": {
+  "bf16/model.safetensors": "bfloat16",
+  "8bit/model.safetensors": "mlx affine 8-bit, group 64",
+  "*/macjev_norms_fp32.safetensors": "exact FP32 (1 + w) of the 61 shifted Qwen3.5 RMSNorms (format macjev-norms-fp32-v1); required by the runtime",
+  "files": {
+   "bf16": {
+    "chat_template.jinja": {
+     "bytes": 7755,
+     "sha256": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80"
+    },
+    "config.json": {
+     "bytes": 2000,
+     "sha256": "1dd31077b37706dc40e1bbddedf5eeba3e50e1d3c85d1fe34bfd5957a8d6ad14"
+    },
+    "generation_config.json": {
+     "bytes": 116,
+     "sha256": "62153eb6c69f2e1f426beaa8002b7186437e949c7588167085df14e10e9c0a73"
+    },
+    "macjev_norms_fp32.safetensors": {
+     "bytes": 419991,
+     "sha256": "2e81a5b9136656bd66698eaf54f2f735cce4f8fb41074dc7a1f36799e010b9ba"
+    },
+    "model.safetensors": {
+     "bytes": 3763691755,
+     "sha256": "98ac43638a2828c343ce7435b69ac69e242cc951a4b1f2cec308aa5399d8fbc4"
+    },
+    "model.safetensors.index.json": {
+     "bytes": 28024,
+     "sha256": "d49d69fd9257879080337533c6051a14ff4f561a79b9f70d8bdb74e47444a306"
+    },
+    "tokenizer.json": {
+     "bytes": 19989325,
+     "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523"
+    },
+    "tokenizer_config.json": {
+     "bytes": 1123,
+     "sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87"
+    }
+   },
+   "8bit": {
+    "chat_template.jinja": {
+     "bytes": 7755,
+     "sha256": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80"
+    },
+    "config.json": {
+     "bytes": 2205,
+     "sha256": "8865dd86a4e561e6b036667cd0d5c1c39ad12527b3feda7c585cf116d890477a"
+    },
+    "generation_config.json": {
+     "bytes": 116,
+     "sha256": "62153eb6c69f2e1f426beaa8002b7186437e949c7588167085df14e10e9c0a73"
+    },
+    "macjev_norms_fp32.safetensors": {
+     "bytes": 419991,
+     "sha256": "2e81a5b9136656bd66698eaf54f2f735cce4f8fb41074dc7a1f36799e010b9ba"
+    },
+    "model.safetensors": {
+     "bytes": 2000043057,
+     "sha256": "651919720864806edb95329553dc351661c5ca488c77f7894ef85cecca9c31c1"
+    },
+    "model.safetensors.index.json": {
+     "bytes": 60786,
+     "sha256": "54d94d008c07e39846c0b454f68055622bb635a0623b51bce86d724e18733aab"
+    },
+    "tokenizer.json": {
+     "bytes": 19989325,
+     "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523"
+    },
+    "tokenizer_config.json": {
+     "bytes": 1123,
+     "sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87"
+    }
+   }
+  }
+ },
+ "conversion": {
+  "recipe": "1 (pre-declared primary: mlx_lm.convert defaults + the FP32 norm sidecar)",
+  "script": "scripts/formats/mlx_convert.py",
+  "commands": [
+   "mlx_lm.convert(<staging: text-only export, model_type qwen3_5>, bf16/, dtype='bfloat16')",
+   "mlx_lm.convert(<staging>, 8bit/, quantize=True, q_bits=8, q_group_size=64, q_mode='affine', dtype='bfloat16')"
+  ],
+  "tokenizer": "tokenizer.json / tokenizer_config.json kept byte-identical to the main repository"
+ },
+ "runtime": {
+  "script": "jev_style_decision_mlx.py",
+  "class": "JevStyleDecisionMLX",
+  "precision_argument": "--precision bf16|8bit (Python: precision=...)",
+  "default_precision": "bf16",
+  "mlx_cache_limit_gib": 2.0,
+  "mlx_lm_required": "0.31.3 (exact; the runtime checks the sha256 of the mlx-lm source it patches and refuses other versions)",
+  "mlx_lm_corrections": {
+   "gdn_qk_l2norm": "Gated-DeltaNet q/k normalised with l2norm eps 1e-6 (HF / fla / llama.cpp) instead of mlx-lm's rms_norm eps 1e-6 (= l2norm eps Dk*1e-6); per-instance class swap",
+   "rmsnorm_fp32_shift": "Qwen3.5 (1 + w) RMSNorm weights taken in FP32 from macjev_norms_fp32.safetensors instead of the bf16-rounded (1 + w) stored by mlx-lm's converter; norms computed in FP32 and cast back"
+  },
+  "state_reuse": "score_many(state, questions) computes the state blocks once and runs every question on a copy of that cache; the last state is kept, so consecutive calls / JSONL rows with an identical state reuse it",
+  "shared_files": "readout_config.json (readout + one calibration temperature per question type), release_config.json and manifest.json are shared by both precisions; each precision folder has its own config.json, tokenizer, weights and norm sidecar",
+  "precisions": {
+   "bf16": {
+    "folder": "bf16/",
+    "weights": "bfloat16",
+    "mlx_compute_dtype": null,
+    "mlx_compute_dtype_note": "native activations (bf16 residual stream; norms and readout in FP32), the setting the release scoring used"
+   },
+   "8bit": {
+    "folder": "8bit/",
+    "weights": "mlx affine 8-bit, group 64",
+    "mlx_compute_dtype": null,
+    "mlx_compute_dtype_note": "native activations, the setting the release scoring used"
+   }
+  },
+  "removed_vs_0.8b_runtime": {
+   "--category": "no group temperatures: one per question type",
+   "--head-max": "no question/options cap: only the 32,768-token total budget; long question+options use the catalogue-overflow layout",
+   "option chunking": "not needed: all options are always scored in one input"
+  },
+  "temperature": "readout_config.json temperatures.by_qtype (choice / noul / score) unless overridden",
+  "images": "not supported (text only): use the main repository's PyTorch runtime",
+  "checks_at_load": {
+   "mlx_bf16": {
+    "n_gdn_patched": 18,
+    "n_norms_exact": 61,
+    "n_full_attention": 6,
+    "compute_dtype": null
+   },
+   "mlx_8bit": {
+    "n_gdn_patched": 18,
+    "n_norms_exact": 61,
+    "n_full_attention": 6,
+    "compute_dtype": null
+   }
+  }
+ },
+ "format_gates": {
+  "predeclared": {
+   "file": "validation/parity/PREDECLARED_RELEASE_GATES_2B_v4.md",
+   "sha256": "cb84de76f5a123a0ae63c130c89f2ce7b8ab6ff5ca17633b0ea9479ddfeff299",
+   "declared": "2026-10-28 00:10 AEDT (fixture sha256 corrected 00:13, before any scoring)"
+  },
+  "reference": "Reference scores for the v4 format gates (2026-10-28; Colab GPU): the main repository's reference scorer in float32\n(V4Engine loading path -> RendererV2 rows -> train.evaluate.score_rows, exact block attention) on the fixtures, plus\nthe two attention controls of the block-mask proof on the base fixture (same weights, rows and readout; only the\nfull-attention layers' mask changes):",
+  "reference_runtime": {
+   "tf32": {
+    "matmul": false,
+    "cudnn": false
+   },
+   "versions": {
+    "torch": "2.14.1+cu130",
+    "transformers": "5.17.0",
+    "cuda": "13.0",
+    "gpu": "NVIDIA L4"
+   },
+   "control_probe_max_abs_dscore": {
+    "causal": 1.0815367698669434,
+    "prefix_causal": 1.1920242309570312
+   }
+  },
+  "fixtures": {
+   "gate_fixture_n1000.jsonl": {
+    "sha256": "0b497f05d34500a2b1244147d553716c4db8ce0dbcdf5f5067bf2319204a9345",
+    "requests": 1000,
+    "questions": 1000,
+    "tokens": 516376,
+    "max_tokens": 3942,
+    "catalogue_overflow": 0,
+    "max_options": 151,
+    "qtypes": {
+     "choice": 645,
+     "noul": 316,
+     "score": 39
+    }
+   },
+   "base_fixture.jsonl": {
+    "sha256": "e3ba04f6f3f62b6b29fa380c7fb3463cdd28e7652f988433e182e2cb5b4c9488",
+    "requests": 70,
+    "questions": 97,
+    "tokens": 1383602,
+    "max_tokens": 32768,
+    "catalogue_overflow": 15,
+    "max_options": 255,
+    "qtypes": {
+     "choice": 71,
+     "noul": 24,
+     "score": 2
+    },
+    "kinds": {
+     "dev_long": 60,
+     "edge": 10
+    },
+    "edge": [
+     "k255_catalogue",
+     "question_block_2048",
+     "question_block_2049_catalogue",
+     "state_2048",
+     "state_2049",
+     "total_32768",
+     "five_shapes_one_state",
+     "special_tokens_text",
+     "empty_state",
+     "json_state"
+    ]
+   }
+  },
+  "render_check": {
+   "fixtures": {
+    "gate_fixture_n1000.jsonl": {
+     "questions": 1000,
+     "tokens": 516376
+    },
+    "base_fixture.jsonl": {
+     "questions": 97,
+     "tokens": 1383602
+    }
+   },
+   "mismatches": [],
+   "ok": true
+  },
+  "formats": {
+   "mlx_bf16": {
+    "verdict": "PASS",
+    "pass": true,
+    "checks": {
+     "render_identical": true,
+     "finite": true,
+     "state_reuse": true,
+     "top1": true,
+     "dnll": true,
+     "block_mask_proof": true
+    },
+    "gates": {
+     "top1_min": 0.99,
+     "dnll_abs_max": 0.02,
+     "proof": true
+    },
+    "values": {
+     "top1_agreement": 0.997,
+     "top1_flips": 3,
+     "dnll": 0.00013648155733475553,
+     "acc_ref": 0.844,
+     "acc_cand": 0.844,
+     "acc_drop_pp": 0.0,
+     "max_abs_dp": 0.03555203244724586,
+     "base_top1_agreement": 1.0,
+     "base_max_abs_dp": 0.010882766944336375,
+     "proof_closer": "97/97",
+     "state_reuse_max_abs_dscore": 0.0
+    },
+    "records": [
+     "validation/parity/compare_mlx_bf16_gate_vs_block.json",
+     "validation/parity/compare_mlx_bf16_base_vs_block.json"
+    ]
+   },
+   "mlx_8bit": {
+    "verdict": "PASS",
+    "pass": true,
+    "checks": {
+     "render_identical": true,
+     "finite": true,
+     "state_reuse": true,
+     "top1": true,
+     "dnll": true,
+     "acc_drop": true
+    },
+    "gates": {
+     "top1_min": 0.98,
+     "dnll_abs_max": 0.02,
+     "acc_drop_pp_max": 0.3
+    },
+    "values": {
+     "top1_agreement": 0.999,
+     "top1_flips": 1,
+     "dnll": -0.0005703743101456715,
+     "acc_ref": 0.844,
+     "acc_cand": 0.845,
+     "acc_drop_pp": -0.10000000000000009,
+     "max_abs_dp": 0.047839638800904416,
+     "base_top1_agreement": 1.0,
+     "base_max_abs_dp": 0.01811457993729837,
+     "proof_closer": "96/97",
+     "state_reuse_max_abs_dscore": 0.0
+    },
+    "records": [
+     "validation/parity/compare_mlx_affine8-g64_gate_vs_block.json",
+     "validation/parity/compare_mlx_affine8-g64_base_vs_block.json"
+    ]
+   }
+  }
+ },
+ "runtime_parity": {
+  "state_reuse": {
+   "mlx_bf16": 0.0,
+   "mlx_8bit": 0.0
+  }
+ },
+ "latency_m1_max": {
+  "what": "wall time of one runtime call during the fixture run (Apple M1 Max, 64 GB, macOS 15.7.5; the machine was otherwise in normal use, so indicative)",
+  "mlx_bf16": {
+   "gate 1-1024 tokens": {
+    "n": 871,
+    "median_ms": 233.4,
+    "p90_ms": 542.9,
+    "max_ms": 801.6
+   },
+   "gate 1025-4096 tokens": {
+    "n": 129,
+    "median_ms": 1014.1,
+    "p90_ms": 2031.4,
+    "max_ms": 2578.4
+   },
+   "base 4097-16384 tokens, one question": {
+    "n": 19,
+    "median_ms": 3294.8,
+    "p90_ms": 8884.1,
+    "max_ms": 10741.0
+   },
+   "base 16385-32768 tokens, one question": {
+    "n": 25,
+    "median_ms": 15524.0,
+    "p90_ms": 21646.3,
+    "max_ms": 26405.6
+   }
+  },
+  "mlx_8bit": {
+   "gate 1-1024 tokens": {
+    "n": 871,
+    "median_ms": 249.3,
+    "p90_ms": 627.6,
+    "max_ms": 927.0
+   },
+   "gate 1025-4096 tokens": {
+    "n": 129,
+    "median_ms": 1156.6,
+    "p90_ms": 2193.6,
+    "max_ms": 2836.7
+   },
+   "base 4097-16384 tokens, one question": {
+    "n": 19,
+    "median_ms": 4235.2,
+    "p90_ms": 11969.4,
+    "max_ms": 13674.6
+   },
+   "base 16385-32768 tokens, one question": {
+    "n": 25,
+    "median_ms": 20092.6,
+    "p90_ms": 27422.6,
+    "max_ms": 32435.8
+   }
+  }
+ },
+ "root_config_json": "copy of bf16/config.json at the repository root so the Hub counts downloads; the runtime treats the root as the repository folder (it has bf16/ and 8bit/ but no model.safetensors) and loads bf16/ or 8bit/",
+ "decision_index": "not run with these files; the main repository's Decision Index numbers come from its PyTorch runtime (bfloat16)"
+}
